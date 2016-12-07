@@ -9,8 +9,27 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <main>
+      <div class="valign-wrapper vertical-align-wrapper">
+        <div class="valign full-width">
+
+          <div class="container">
+            <div class="row">
+
+              <div class="col s12">
+                  <div class="row">
+                    <%= render partial: 'layouts/messages' %>
+                  </div>
+                  <div class="row">
+                    <%= yield %>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
   </body>
 </html>

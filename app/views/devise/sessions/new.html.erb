@@ -1,24 +1,35 @@
-<h2>Log in</h2>
+<div class="col s12 m6 offset-m3 l4 offset-l4">
+  <ul class="collection with-header">
+    <li class="collection-header">
+      <h5>Log in</h5>
+    </li>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+    <li class="collection-item">
+      <div class="row">
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="input-field col s12">
+            <%= f.email_field :email, autofocus: true %>
+            <%= f.label :email %><br />
+          </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
+          <div class="input-field col s12">
+            <%= f.password_field :password, autocomplete: "off" %>
+            <%= f.label :password %><br />
+          </div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+          <% if devise_mapping.rememberable? -%>
+            <div class="input-field col s12">
+              <%= f.check_box :remember_me, class: 'filled-in' %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end -%>
+
+          <div class="input-field col s12">
+            <%= f.submit 'Sign in', class: 'btn waves-effect waves-light right' %>
+          </div>
+        <% end %>
+      </div>
+    </li>
+  </ul>
+</div>

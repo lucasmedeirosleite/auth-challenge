@@ -1,0 +1,13 @@
+<% if notice || alert %>
+  <div class="col s12 m6 offset-m3 l4 offset-l4">
+    <div class="card-panel">
+      <% if notice %>
+        <span class="green-text text-darken-2"><%= notice %></span>
+      <% end %>
+
+      <% if alert %>
+        <span class="red-text text-darken-2"><%= alert %></span>
+      <% end %>
+    </div>
+  </div>
+<% end %>
