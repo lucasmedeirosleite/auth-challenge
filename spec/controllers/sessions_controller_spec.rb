@@ -13,10 +13,6 @@ describe SessionsController, type: :controller do
         let(:email) { '' }
         let(:password) { 'password123' }
 
-        it 'does not authorize' do
-          expect(response).to be_unauthorized
-        end
-
         it 'sets error message' do
           expect(flash[:alert]).not_to be_nil
         end
@@ -25,10 +21,6 @@ describe SessionsController, type: :controller do
       context 'when email with invalid format' do
         let(:password) { 'password123' }
         let(:email) { 'invalid_email' }
-
-        it 'does not authorize' do
-          expect(response).to be_unauthorized
-        end
 
         it 'sets error message' do
           expect(flash[:alert]).not_to be_nil
@@ -39,10 +31,6 @@ describe SessionsController, type: :controller do
         let(:password) { 'pass' }
         let(:email) { 'email@example.com' }
 
-        it 'does not authorize' do
-          expect(response).to be_unauthorized
-        end
-
         it 'sets error message' do
           expect(flash[:alert]).not_to be_nil
         end
@@ -51,10 +39,6 @@ describe SessionsController, type: :controller do
       context "when password field has the value of 'password'" do
         let(:password) { 'password' }
         let(:email) { 'email@example.com' }
-
-        it 'does not authorize' do
-          expect(response).to be_unauthorized
-        end
 
         it 'sets error message' do
           expect(flash[:alert]).not_to be_nil
@@ -67,7 +51,7 @@ describe SessionsController, type: :controller do
       let(:password) { 'password123' }
 
       before do
-        FactoryGirl.create(:user, email: email, password: password)
+        FactoryGirl.create(:user, email: email, password: password, password_confirmation: password)
         process :create, method: :post, params: { user: { email: email, password: password } }
       end
 
