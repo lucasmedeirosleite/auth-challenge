@@ -1,20 +1,26 @@
 require 'rails_helper'
 
+# Validator which is used on both User model and SessionsController#create
 describe PasswordValidator, type: :validator do
   subject(:validator) { PasswordValidator.new }
 
   describe '#validate' do
+
+    # When it's been used inside the User model
     context 'when handling model' do
-      context 'when succeeds' do
-        it 'does not have an error message' do
+
+      # Checks if password field has value 'password'
+      context 'when fails' do
+        it 'has an error message' do
           user = User.new(password: 'password')
           validator.validate(user)
           expect(user.errors).not_to be_empty
         end
       end
 
-      context 'when fails' do
-        it 'sets error message' do
+      # Checks if password field does not have value 'password'
+      context 'when succeeds' do
+        it 'does not have an error message' do
           user = User.new(password: 'password2')
           validator.validate(user)
           expect(user.errors).to be_empty
@@ -22,17 +28,17 @@ describe PasswordValidator, type: :validator do
       end
     end
 
+    # When it's checking a string
     context 'when handling a string' do
-      context 'when succeeds' do
-        it 'returns status and an error message' do
-          expect(validator.validate('password')).to be false
-        end
+
+      # It returns false when passed string is 'password'
+      context 'when fails' do
+        it { expect(validator.validate('password')).to be false }
       end
 
-      context 'when fails' do
-        it 'sets error message' do
-          expect(validator.validate('password1')).to be true
-        end
+      # It returns true when passed string is not 'password'
+      context 'when succeeds' do
+        it { expect(validator.validate('password1')).to be true }
       end
     end
   end

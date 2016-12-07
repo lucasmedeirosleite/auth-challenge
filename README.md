@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Code challenge
 
-Things you may want to cover:
+## Pre-requisites:
 
-* Ruby version
+* Ruby 2.3+
+* PostgreSQL
 
-* System dependencies
+## Commands
 
-* Configuration
+* `bundle install`
+* `bin/rails db:create` (you need to configure `database.yml` with your machine config)
+* `bin/rails db:migrate`
+* `bin/rails db:seed` (this will create a user with email: `user@example.com` and password: `password123`)
 
-* Database creation
+## Specs
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To run the specs run this:
+`bin/rspec spec`
