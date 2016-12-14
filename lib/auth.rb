@@ -1,4 +1,4 @@
-require './auth/service'
+require_relative './auth/service'
 
 module Auth
 end

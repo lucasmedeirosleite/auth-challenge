@@ -12,6 +12,8 @@ Bundler.require(*Rails.groups)
 
 module AuthChallenge
   class Application < Rails::Application
+    config.autoload_paths << Rails.root.join('app', 'services')
     config.autoload_paths << Rails.root.join('app', 'validators')
+    config.autoload_paths << Rails.root.join('app', 'repositories')
   end
 end

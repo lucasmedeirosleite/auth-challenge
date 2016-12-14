@@ -11,6 +11,8 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'materialize-sass', '0.97.8'
 
+gem 'bcrypt'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry-byebug'
