@@ -1,15 +1,15 @@
 class Users
-  def initialize(encrypter = Encrypter)
-    @encrypter = encrypter
+  def initialize(cipher = Cipher.new)
+    @cipher = cipher
   end
 
   def save(user)
     return false unless user.valid?
-    user.encrypted_password = encrypter.call(user.password)
+    user.encrypted_password = cipher.encrypt(user.password)
     user.save
   end
 
   private
 
-  attr_reader :encrypter
+  attr_reader :cipher
 end

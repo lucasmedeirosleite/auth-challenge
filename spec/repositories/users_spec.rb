@@ -19,8 +19,8 @@ describe Users, type: :repository do
     end
 
     context 'when validation succeeds' do
-      subject(:repository) { Users.new(encrypter) }
-      let(:encrypter) { FakeEncrypter.new }
+      subject(:repository) { Users.new(cipher) }
+      let(:cipher) { FakeCipher.new }
 
       let(:user) { FactoryGirl.build(:user, password: password, password_confirmation: password) }
       let(:password) { 'password1' }
@@ -31,7 +31,7 @@ describe Users, type: :repository do
       end
 
       it 'encrypts password' do
-        expected_pass = encrypter.call(password)
+        expected_pass = cipher.encrypt(password)
         repository.save(user)
         expect(user.encrypted_password).to eq expected_pass
       end
@@ -41,8 +41,8 @@ describe Users, type: :repository do
         expect(User.count).to eq 1
       end
 
-      class FakeEncrypter < Encrypter
-        def call(password)
+      class FakeCipher < Cipher
+        def encrypt(password)
           password.reverse
         end
       end
