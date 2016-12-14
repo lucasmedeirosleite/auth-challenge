@@ -1,14 +1,12 @@
 require 'rails_helper'
 
-describe SessionsController, type: :controller do
+describe AuthenticationController, type: :controller do
 
   # Testing the action that is called when the user tries to login
-  describe 'POST #create' do
-    before { @request.env["devise.mapping"] = Devise.mappings[:user] }
-
+  describe 'POST #sign_in' do
     context 'when authentication fails' do
       before do
-        process :create, method: :post, params: { user: { email: email, password: password } }
+        process :sign_in, method: :post, params: { user: { email: email, password: password } }
       end
 
       # Trying to login with invalid information
@@ -61,10 +59,11 @@ describe SessionsController, type: :controller do
     context 'when authentication succeeds' do
       let(:email)    { 'email@example.com' }
       let(:password) { 'password123' }
+      let(:user) { FactoryGirl.build(:user, email: email, password: password, password_confirmation: password) }
 
       before do
-        FactoryGirl.create(:user, email: email, password: password, password_confirmation: password)
-        process :create, method: :post, params: { user: { email: email, password: password } }
+        Users.new.save(user)
+        process :sign_in, method: :post, params: { user: { email: email, password: password } }
       end
 
       it 'redirects' do
@@ -73,6 +72,10 @@ describe SessionsController, type: :controller do
 
       it 'sets success message' do
         expect(flash[:notice]).not_to be_nil
+      end
+
+      it 'sets user id' do
+        expect(session[:user_id]).to eq user.id
       end
     end
   end
