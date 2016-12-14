@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cipher do
+describe Cipher, type: :service do
   let(:password) { 'password' }
 
   describe '#encrypt' do
