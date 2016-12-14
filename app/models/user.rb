@@ -1,8 +1,9 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, password_length: 8..128
+  attr_accessor :password
 
-  validates_with PasswordValidator
+  validates :email, presence: true, email: true, uniqueness: true
+  validates :password, presence: true, length: { minimum: 8 }, confirmation: true
+  validates :password_confirmation, presence: true
+
+  validates_with PasswordWordValidator
 end

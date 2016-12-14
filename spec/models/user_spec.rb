@@ -3,14 +3,17 @@ require 'rails_helper'
 describe User, type: :model do
   describe 'validations' do
     it { is_expected.to validate_presence_of(:email) } # email is required
+
     it { is_expected.to validate_presence_of(:password) } # password is required
-    it { is_expected.to validate_confirmation_of(:password) } # must have a confirmation field for password
     it { is_expected.to validate_length_of(:password).is_at_least(8) } # password must have at least 8 characters
+
+    it { is_expected.to validate_confirmation_of(:password) } # must have a confirmation field for password
+    it { is_expected.to validate_presence_of(:password_confirmation) } # password confirmation is required
 
     describe 'email format' do
       it { is_expected.not_to allow_value('email').for(:email) } # invalid email format
       it { is_expected.not_to allow_value('email@').for(:email) } # invalid email format
-      it { is_expected.to allow_value('email@example').for(:email) } # valid email format
+      it { is_expected.not_to allow_value('email@example').for(:email) } # valid email format
       it { is_expected.to allow_value('email@example.com').for(:email) } # valid email format
     end
 

@@ -1,4 +1,4 @@
-class PasswordValidator < ActiveModel::Validator
+class PasswordWordValidator < ActiveModel::Validator
   def validate(value)
     return handle_string(value) if value.kind_of?(String)
     handle_model(value)

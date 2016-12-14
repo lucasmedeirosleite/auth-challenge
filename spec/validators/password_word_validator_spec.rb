@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 # Validator which is used on both User model and SessionsController#create
-describe PasswordValidator, type: :validator do
-  subject(:validator) { PasswordValidator.new }
+describe PasswordWordValidator, type: :validator do
+  subject(:validator) { PasswordWordValidator.new }
 
   describe '#validate' do
 
