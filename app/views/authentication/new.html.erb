@@ -7,7 +7,7 @@
     <li class="collection-item">
       <div class="row">
 
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= form_for(@user, url: sign_in_authentication_index_path) do |f| %>
           <div class="input-field col s12">
             <%= f.email_field :email, autofocus: true %>
             <%= f.label :email %><br />
@@ -17,13 +17,6 @@
             <%= f.password_field :password, autocomplete: "off" %>
             <%= f.label :password %><br />
           </div>
-
-          <% if devise_mapping.rememberable? -%>
-            <div class="input-field col s12">
-              <%= f.check_box :remember_me, class: 'filled-in' %>
-              <%= f.label :remember_me %>
-            </div>
-          <% end -%>
 
           <div class="input-field col s12">
             <%= f.submit 'Sign in', class: 'btn waves-effect waves-light right' %>

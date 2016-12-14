@@ -1,10 +1,12 @@
 class AuthenticationController < ApplicationController
   def new
+    @user = User.new
   end
 
   def sign_in
-    if Authenticator.call(user_params[:email], user_params[:password])
-      session[:user_id] = User.find_by(email: user_params[:email]).id
+    @user = User.new(user_params)
+    if Authenticator.call(@user.email, @user.password)
+      session[:user_id] = User.find_by(email: @user.email).id
       flash[:notice] = 'Signed in successfully'
       redirect_to root_path
     else
