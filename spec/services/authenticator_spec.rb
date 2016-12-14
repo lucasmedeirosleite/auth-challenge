@@ -14,6 +14,12 @@ describe Authenticator, type: :service do
       end
     end
 
+    context 'when password has value "password"' do
+      it 'fails' do
+        expect(authenticator.call(email, 'password')).to be false
+      end
+    end
+
     context 'when user password did not match' do
       let(:wrong_password) { 'password' }
 
